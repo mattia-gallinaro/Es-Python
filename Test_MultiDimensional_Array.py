@@ -4,27 +4,39 @@ import numpy as nmp
 import string
 import random
 
-x = [[""]* 1] * 17 
-print(x[1])
-total = 100
+
+index = 0
+x = [[" "]* 1 for i in range(18)]  
+print(x)
+
+
+total = 1000000
 def GeneraParola():
     letters = string.ascii_letters + string.punctuation + string.digits
     frase = ''.join(random.choice(letters) for i in range(random.randint(3, 20)))
     #print(frase)
     return frase;
 
-#*def ControllArray(arr, i):
-    #for i in range(arr[i]):
-        #print("Hello")
+def ControllArray(arr, frase, length):
+    result = 0
+    for i in range(length):
+        if(arr[i] == frase):
+            result = 1
+            break;
+    return result
         
 for i in range(total):
     frase = GeneraParola()
-    frase.join(x[length_hint(frase) -3])
-    print(x[length_hint(frase) -3])
-    #print(length_hint(frase) , " \n" , frase)
-    #print(type(x[length_hint(frase) -3].shape))
-    #x[length_hint(frase) -3].shape = tuple(int(str(x[length_hint(frase) -3].shape)) +1)
-    #x[length_hint(frase)].shape = (x[length_hint(frase)].shape + 1)
-    #print(x[length_hint(frase) - 3].shape, length_hint(frase))
+    
+    if((ControllArray(x[length_hint(frase) -3], frase, len(x[length_hint(frase) -3]))) == 0 or len(x[length_hint(frase) -3]) == 1):
+        (x[length_hint(frase) -3]).append(frase)
+    else:
+        i -= 1
+    print(i)
+    
+f = open("test.txt", "w")
+for i in range(18):
+    for c in range(len(x[i])): 
+        f.write(x[i][c] + "\n")
 
 
